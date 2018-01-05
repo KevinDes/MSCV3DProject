@@ -20,6 +20,7 @@ private:
 signals:
 
 public slots:
+
 };
 
 #endif // FINALRESULT_H

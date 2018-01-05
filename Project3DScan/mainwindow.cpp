@@ -6,6 +6,7 @@
 #include <QImage>
 #include <QFileDialog>
 #include <QDir>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,8 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    mesh = new gomesh();
-    finres = new finalresult();
+    scene = new QGraphicsScene(this);//creation of the scene
+
+    ui->graphicsView->setScene(scene);//set the scene on the graphicsView
+
 }
 
 MainWindow::~MainWindow()
@@ -24,19 +27,44 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    //Load an image
+    //Load some files
 
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                    QDir::currentPath(),
-                                                    tr("Images (*.ply *.pcd)"));
 
-    //Openning of the window mesh
+    if(ui->radioButton->isChecked() )
+    {
+        QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                        QDir::currentPath(),
+                                                        tr("Images (*.pcd)"));
 
-    mesh->show();
+        QImage image(fileName);
+        QPixmap pixmap(fileName);
+        scene->addPixmap(pixmap);
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->show();
+    }
+    if(ui->radioButton_2->isChecked() )
+    {
+        QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                        QDir::currentPath(),
+                                                        tr("Images (*.ply)"));
 
+        QImage image(fileName);
+        QPixmap pixmap(fileName);
+        scene->addPixmap(pixmap);
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->show();
+    }
+    if(ui->radioButton_3->isChecked() )
+    {
+        QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                        QDir::currentPath(),
+                                                        tr("Images (*.jpg)"));
+
+        QImage image(fileName);
+        QPixmap pixmap(fileName);
+        scene->addPixmap(pixmap);
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->show();
+    }
 }
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    finres->show();
-}

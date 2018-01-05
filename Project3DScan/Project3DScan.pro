@@ -13,14 +13,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    finalresult.cpp \
-    gomesh.cpp
+        mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    finalresult.h \
-    gomesh.h
+HEADERS  += mainwindow.h
 
-FORMS    += mainwindow.ui \
-    finalresult.ui \
-    gomesh.ui
+FORMS    += mainwindow.ui
